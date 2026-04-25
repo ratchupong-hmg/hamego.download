@@ -131,6 +131,13 @@ def update_queue():
 
     return jsonify({"status": "updated"})
 
+@app.route("/")
+def home():
+    return "HAMEGO Flask is running 🚀"
+    
+@app.route("/download")
+def download():
+    return "Download page here"
 
 if __name__ == "__main__":
     app.run()
