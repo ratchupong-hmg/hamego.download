@@ -12,7 +12,11 @@ photos = {
 @app.route("/p/<session_id>")
 def landing(session_id):
 
-    photo = photos.get(session_id)
+    photos = [
+        "https://pub-0dfaa927561b49c8a0b5b103428dd44c.r2.dev/2026/BS001/BS0013260531005940/result.jpg",
+        "https://pub-0dfaa927561b49c8a0b5b103428dd44c.r2.dev/2026/BS001/BS0010260530213226/result.jpg",
+        "https://pub-0dfaa927561b49c8a0b5b103428dd44c.r2.dev/2026/BS001/BS0010260530220431/result.jpg"
+    ]
 
     if not photo:
         return "Photo not found", 404
@@ -20,7 +24,7 @@ def landing(session_id):
     return render_template(
         "landing.html",
         session_id=session_id,
-        photo=photo
+        photos=photos
     )
 
 if __name__ == "__main__":

@@ -26,8 +26,28 @@
 
 <h1>Your Photo</h1>
 
-<img src="{{ photo.photo_url }}"
-     class="preview">
+<div class="gallery">
+
+    <button id="prevBtn">
+        ←
+    </button>
+
+    <img
+        id="preview"
+        class="preview"
+        src="{{ photos[0] }}">
+
+    <button id="nextBtn">
+        →
+    </button>
+
+</div>
+
+<div class="indicator">
+    <span id="counter">
+        1 / {{ photos|length }}
+    </span>
+</div>
 
 <div class="button-group">
 
@@ -48,12 +68,12 @@
 <div class="social">
 
     <a class="social-btn"
-       href="#">
+       href="https://www.facebook.com/sharer/sharer.php?u=https://pub-0dfaa927561b49c8a0b5b103428dd44c.r2.dev/2026/BS001/BS0010260530213226/result.jpg" target="_blank">
         Share Facebook
     </a>
 
     <a class="social-btn"
-       href="#">
+       href="https://social-plugins.line.me/lineit/share?url=https://pub-0dfaa927561b49c8a0b5b103428dd44c.r2.dev/2026/BS001/BS0010260530213226/result.jpg" target="_blank">
         Share LINE
     </a>
 
@@ -70,6 +90,15 @@
 ```
 
 </div>
+
+
+<script>
+
+const photos = {{ photos|tojson }};
+
+</script>
+
+<script src="/static/js/gallery.js"></script>
 
 </body>
 </html>
