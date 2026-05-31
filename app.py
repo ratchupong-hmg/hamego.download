@@ -18,7 +18,7 @@ def landing(session_id):
         "https://pub-0dfaa927561b49c8a0b5b103428dd44c.r2.dev/2026/BS001/BS0010260530220431/result.jpg"
     ]
 
-    if not photo:
+    if not photos:
         return "Photo not found", 404
 
     return render_template(

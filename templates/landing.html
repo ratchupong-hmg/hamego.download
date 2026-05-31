@@ -20,26 +20,161 @@
 
 <div class="container">
 
-```
-<img src="/static/img/HMGC_Brand.jpg"
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+   content="width=device-width, initial-scale=1.0">
+
+<title>HAMEGO Photo Gallery</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Prompt;
+    background:#f8f7f3;
+}
+
+.container{
+    width:100%;
+    max-width:430px;
+    margin:auto;
+    min-height:100vh;
+    background:white;
+    padding:20px;
+}
+
+.logo{
+    width:150px;
+    display:block;
+    margin:auto;
+}
+
+h3{
+    text-align:center;
+    margin:20px 0;
+}
+
+.gallery{
+    position:relative;
+}
+
+.preview{
+    width:100%;
+    border-radius:12px;
+}
+
+#prevBtn,
+#nextBtn{
+
+    position:absolute;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:40px;
+    height:40px;
+
+    border:none;
+    border-radius:50%;
+
+    background:rgba(0,0,0,.5);
+    color:white;
+
+    font-size:20px;
+    cursor:pointer;
+}
+
+#prevBtn{
+    left:10px;
+}
+
+#nextBtn{
+    right:10px;
+}
+
+.indicator{
+    text-align:center;
+    margin-top:10px;
+}
+
+.button-group{
+    margin-top:20px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.btn{
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    background:black;
+    color:white;
+    padding:14px;
+    border-radius:10px;
+}
+
+.social{
+    margin-top:20px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.social-btn{
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    background:#ececec;
+    color:black;
+    padding:12px;
+    border-radius:10px;
+}
+
+.follow{
+    margin-top:30px;
+    text-align:center;
+}
+
+.follow a{
+    display:block;
+    margin-top:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+<img src="/static/img/HAMEGO_Photobooth_Brand.png"
      class="logo">
 
-<h1>Your Photo</h1>
+<h3>Your Photo</h3>
 
 <div class="gallery">
 
-    <button id="prevBtn">
-        ←
-    </button>
+    <button id="prevBtn">←</button>
 
     <img
         id="preview"
         class="preview"
         src="{{ photos[0] }}">
 
-    <button id="nextBtn">
-        →
-    </button>
+    <button id="nextBtn">→</button>
 
 </div>
 
@@ -51,16 +186,11 @@
 
 <div class="button-group">
 
-    <a href="{{ photo.photo_url }}"
+    <a id="downloadBtn"
+       href="{{ photos[0] }}"
        class="btn"
        download>
         Download Photo
-    </a>
-
-    <a href="{{ photo.strip_url }}"
-       class="btn"
-       download>
-        Download Strip
     </a>
 
 </div>
@@ -83,22 +213,141 @@
 
     <h3>Follow Us</h3>
 
-    <a href="#">Facebook</a>
-    <a href="#">Instagram</a>
+    <a href="https://facebook.com/"
+       target="_blank">
+        Facebook
+    </a>
+
+    <a href="https://instagram.com/"
+       target="_blank">
+        Instagram
+    </a>
 
 </div>
-```
-
 </div>
-
-
+<footer style="text-align:center; margin-top:30px;">
+    <div style="font-size:10px; color:#888;">Powered by HAMEGO Creation Team</div>
+    <div style="font-size:9px; color:#aaa;">• Beta v1.001</div>
+</footer>
 <script>
 
 const photos = {{ photos|tojson }};
 
-</script>
+let currentIndex = 0;
 
-<script src="/static/js/gallery.js"></script>
+const preview =
+    document.getElementById("preview");
+
+const counter =
+    document.getElementById("counter");
+
+const downloadBtn =
+    document.getElementById("downloadBtn");
+
+const facebookBtn =
+    document.getElementById("facebookBtn");
+
+const lineBtn =
+    document.getElementById("lineBtn");
+
+function updatePhoto(){
+
+    const currentPhoto =
+        photos[currentIndex];
+
+    preview.src =
+        currentPhoto;
+
+    downloadBtn.href =
+        currentPhoto;
+
+    facebookBtn.href =
+        "https://www.facebook.com/sharer/sharer.php?u="
+        + encodeURIComponent(currentPhoto);
+
+    lineBtn.href =
+        "https://social-plugins.line.me/lineit/share?url="
+        + encodeURIComponent(currentPhoto);
+
+    counter.innerText =
+        `${currentIndex + 1} / ${photos.length}`;
+}
+
+document
+.getElementById("nextBtn")
+.addEventListener("click", ()=>{
+
+    currentIndex++;
+
+    if(currentIndex >= photos.length){
+        currentIndex = 0;
+    }
+
+    updatePhoto();
+});
+
+document
+.getElementById("prevBtn")
+.addEventListener("click", ()=>{
+
+    currentIndex--;
+
+    if(currentIndex < 0){
+        currentIndex = photos.length - 1;
+    }
+
+    updatePhoto();
+});
+
+let touchStartX = 0;
+let touchEndX = 0;
+
+preview.addEventListener(
+    "touchstart",
+    e=>{
+        touchStartX =
+            e.changedTouches[0].screenX;
+    }
+);
+
+preview.addEventListener(
+    "touchend",
+    e=>{
+
+        touchEndX =
+            e.changedTouches[0].screenX;
+
+        const distance =
+            touchEndX - touchStartX;
+
+        if(distance > 50){
+
+            currentIndex--;
+
+            if(currentIndex < 0){
+                currentIndex =
+                    photos.length - 1;
+            }
+
+            updatePhoto();
+        }
+
+        if(distance < -50){
+
+            currentIndex++;
+
+            if(currentIndex >= photos.length){
+                currentIndex = 0;
+            }
+
+            updatePhoto();
+        }
+    }
+);
+
+updatePhoto();
+
+</script>
 
 </body>
 </html>
