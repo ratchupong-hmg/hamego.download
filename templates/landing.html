@@ -1,38 +1,12 @@
 <!DOCTYPE html>
 
 <html>
-
 <head>
-
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HAMEGO Download Portal</title>
 
-<meta name="viewport"
-   content="width=device-width, initial-scale=1">
-
-<title>Photo Download</title>
-
-<link rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}">
-
-</head>
-
-<body>
-
-<div class="container">
-
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-   content="width=device-width, initial-scale=1.0">
-
-<title>HAMEGO Photo Gallery</title>
-
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <style>
 
 *{
@@ -154,55 +128,37 @@ h3{
 }
 
 </style>
-
 </head>
 
 <body>
-
 <div class="container">
-<img src="/static/img/HAMEGO_Photobooth_Brand.png"
-     class="logo">
-
+<img src="/static/img/HAMEGO_Photobooth_Brand.png" class="logo">
 <h3>Your Photo</h3>
-
 <div class="gallery">
-
-    <button id="prevBtn">←</button>
-
-    <img
-        id="preview"
-        class="preview"
-        src="{{ photos[0] }}">
-
-    <button id="nextBtn">→</button>
-
+    <button id="prevBtn">&lt;</button>
+    <img id="preview" class="preview" src="{{ photos[0] }}">
+    <button id="nextBtn">&gt;</button>
 </div>
 
 <div class="indicator">
-    <span id="counter">
-        1 / {{ photos|length }}
-    </span>
+    <span id="counter">1 / {{ photos|length }}</span>
 </div>
 
 <div class="button-group">
-
-    <a id="downloadBtn"
-       href="{{ photos[0] }}"
-       class="btn"
-       download>
-        Download Photo
-    </a>
-
+    <a id="downloadBtn" href="{{ photos[0] }}" class="btn" download>Download Photo</a>
 </div>
 
 <div class="social">
-
-    <a class="social-btn"
+<a id="facebookBtn" 
+   class="social-btn"
+   target="_blank"
        href="https://www.facebook.com/sharer/sharer.php?u=https://pub-0dfaa927561b49c8a0b5b103428dd44c.r2.dev/2026/BS001/BS0010260530213226/result.jpg" target="_blank">
         Share Facebook
     </a>
 
-    <a class="social-btn"
+<a id="lineBtn"
+   class="social-btn"
+   target="_blank"
        href="https://social-plugins.line.me/lineit/share?url=https://pub-0dfaa927561b49c8a0b5b103428dd44c.r2.dev/2026/BS001/BS0010260530213226/result.jpg" target="_blank">
         Share LINE
     </a>
