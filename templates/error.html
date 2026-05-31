@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HAMEGO Download Portal</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Prompt, Thonburi, sans-serif;
+    background:#f8f7f3;
+}
+
+.container{
+    width:100%;
+    max-width:430px;
+    margin:auto;
+    min-height:80vh;
+    background:white;
+    padding:20px;
+}
+
+.logo{
+    width:150px;
+    display:block;
+    margin:auto;
+}
+
+h3{
+    text-align:center;
+    margin:20px 0;
+}
+
+.gallery{
+    position:relative;
+}
+
+.preview{
+    width:100%;
+    border-radius:12px;
+}
+
+#prevBtn,
+#nextBtn{
+
+    position:absolute;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:40px;
+    height:40px;
+
+    border:none;
+    border-radius:50%;
+
+    background:rgba(0,0,0,.5);
+    color:white;
+
+    font-size:20px;
+    cursor:pointer;
+}
+
+#prevBtn{
+    left:10px;
+}
+
+#nextBtn{
+    right:10px;
+}
+
+.indicator{
+    text-align:center;
+    margin-top:10px;
+}
+
+.button-group{
+    margin-top:20px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.btn{
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    background:black;
+    color:white;
+    padding:14px;
+    border-radius:10px;
+}
+
+.social{
+    margin-top:20px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.social-btn{
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    background:#ececec;
+    color:black;
+    padding:12px;
+    border-radius:10px;
+}
+
+.follow{
+    margin-top:30px;
+    text-align:center;
+}
+
+.follow a{
+    display:block;
+    margin-top:10px;
+}
+
+</style>
+</head>
+
+<body>
+<div class="container">
+<img src="/static/img/HAMEGO_Photobooth_Brand.png" class="logo">
+<h3>Photo Not Found</h3>
+<div class="indicator">
+    <span id="counter">ไม่พบรูปถ่ายของท่าน เนื่องจากรูปถ่ายจะมีอายุบนระบบไม่เกิน 30 วัน หลังจากนั้นจะไม่สามารถ Download ได้ ขออภัยในความไม่สะดวก<br>&nbsp;<br>
+Your photo could not be found. Photos are available for download for up to 30 days after being uploaded. After that, they are permanently removed from the system.<br>&nbsp;<br>We apologize for the inconvenience.</span>
+</div>
+</div>
+<footer style="text-align:center; margin-top:30px;">
+    <div style="font-size:10px; color:#888;">Powered by HAMEGO Creation Team</div>
+    <div style="font-size:9px; color:#aaa;">• Beta v1.001</div>
+</footer>
+</body>
+</html>

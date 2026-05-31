@@ -11,7 +11,6 @@ def landing(session_id):
 
     photos = [
         "https://pub-0dfaa927561b49c8a0b5b103428dd44c.r2.dev/2026/BS001/BS0013260531005940/result.jpg",
-        "https://pub-0dfaa927561b49c8a0b5b103428dd44c.r2.dev/2026/BS001/BS0010260530213226/result.jpg",
         "https://pub-0dfaa927561b49c8a0b5b103428dd44c.r2.dev/2026/BS001/BS0010260530220431/result.jpg"
     ]
 
@@ -42,7 +41,12 @@ def landing_db(session_id):
         db.close()
 
     if not photos:
-        return "Photo not found", 404
+        return render_template(
+        "error.html",
+        session_id=session_id,
+        photos=photos
+    )
+
 
     return render_template(
         "landing.html",
