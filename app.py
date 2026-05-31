@@ -10,8 +10,9 @@ app = Flask(__name__)
 def landing(session_id):
 
     photos = [
-        "https://pub-0dfaa927561b49c8a0b5b103428dd44c.r2.dev/2026/BS001/BS0013260531005940/result.jpg",
-        "https://pub-0dfaa927561b49c8a0b5b103428dd44c.r2.dev/2026/BS001/BS0010260530220431/result.jpg"
+        "https://pub-0dfaa927561b49c8a0b5b103428dd44c.r2.dev/2026/BS001/BS0010260530220431/result.jpg",
+        "https://pub-0dfaa927561b49c8a0b5b103428dd44c.r2.dev/2026/BS001/BS0013260531005940/result.jpg"
+        
     ]
 
     if not photos:
