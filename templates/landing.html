@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport"
+   content="width=device-width, initial-scale=1">
+
+<title>Photo Download</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+```
+<img src="/static/img/HMGC_Brand.jpg"
+     class="logo">
+
+<h1>Your Photo</h1>
+
+<img src="{{ photo.photo_url }}"
+     class="preview">
+
+<div class="button-group">
+
+    <a href="{{ photo.photo_url }}"
+       class="btn"
+       download>
+        Download Photo
+    </a>
+
+    <a href="{{ photo.strip_url }}"
+       class="btn"
+       download>
+        Download Strip
+    </a>
+
+</div>
+
+<div class="social">
+
+    <a class="social-btn"
+       href="#">
+        Share Facebook
+    </a>
+
+    <a class="social-btn"
+       href="#">
+        Share LINE
+    </a>
+
+</div>
+
+<div class="follow">
+
+    <h3>Follow Us</h3>
+
+    <a href="#">Facebook</a>
+    <a href="#">Instagram</a>
+
+</div>
+```
+
+</div>
+
+</body>
+</html>
