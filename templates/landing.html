@@ -159,22 +159,11 @@ h3{
     <a id="downloadBtn" href="{{ photos[0] }}" target="_blank" class="btn" download>Download Photo</a>	
 </div>
 
+
 <div class="social">
-<a id="facebookBtn" 
-   class="social-btn"
-   target="_blank"
-       href="{{ photos[0] }}" target="_blank">
-        Share Facebook
-    </a>
-
-<a id="lineBtn"
-   class="social-btn"
-   target="_blank"
-       href="{{ photos[0] }}" target="_blank">
-        Share LINE
-    </a>
-
+    <button id="shareBtn" class="social-btn">Share Photo</button>
 </div>
+
 
 <div class="follow">
     <h3>Follow Us</h3>
@@ -208,12 +197,6 @@ const counter =
 const downloadBtn =
     document.getElementById("downloadBtn");
 
-const facebookBtn =
-    document.getElementById("facebookBtn");
-
-const lineBtn =
-    document.getElementById("lineBtn");
-
 function updatePhoto(){
 
     const currentPhoto =
@@ -224,14 +207,6 @@ function updatePhoto(){
 
     downloadBtn.href =
         currentPhoto;
-
-    facebookBtn.href =
-        "https://www.facebook.com/sharer/sharer.php?u="
-        + encodeURIComponent(currentPhoto);
-
-    lineBtn.href =
-        "https://social-plugins.line.me/lineit/share?url="
-        + encodeURIComponent(currentPhoto);
 
     counter.innerText =
         `${currentIndex + 1} / ${photos.length}`;
@@ -246,6 +221,77 @@ document
     if(currentIndex >= photos.length){
         currentIndex = 0;
     }
+
+
+const shareBtn =
+    document.getElementById("shareBtn");
+
+shareBtn.addEventListener("click", async () => {
+
+    const currentPhoto =
+        photos[currentIndex];
+
+    try{
+
+        const response =
+            await fetch(currentPhoto);
+
+        const blob =
+            await response.blob();
+
+        const file =
+            new File(
+                [blob],
+                "HAMEGO Photo.jpg",
+                {
+                    type: blob.type
+                }
+            );
+
+        if(
+            navigator.canShare &&
+            navigator.canShare({
+                files:[file]
+            })
+        ){
+
+            await navigator.share({
+
+                title:"HAMEGO Photo",
+
+                text:"Shared from HAMEGO",
+
+                files:[file]
+
+            });
+
+        }
+        else{
+
+            await navigator.share({
+
+                title:"HAMEGO Photo",
+
+                text:"Shared from HAMEGO",
+
+                url:currentPhoto
+
+            });
+
+        }
+
+    }
+    catch(err){
+
+        console.log(err);
+
+        alert("Share cancelled.");
+
+    }
+
+});
+
+
 
     updatePhoto();
 });
