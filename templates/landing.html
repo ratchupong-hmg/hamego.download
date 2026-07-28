@@ -161,7 +161,7 @@ h3{
 
 
 <div class="social">
-    <button id="shareBtn" class="social-btn">Share Photo</button>
+    <button id="shareBtn" class="btn">Share Photo</button>
 </div>
 
 
@@ -211,17 +211,6 @@ function updatePhoto(){
     counter.innerText =
         `${currentIndex + 1} / ${photos.length}`;
 }
-
-document
-.getElementById("nextBtn")
-.addEventListener("click", ()=>{
-
-    currentIndex++;
-
-    if(currentIndex >= photos.length){
-        currentIndex = 0;
-    }
-
 
 const shareBtn =
     document.getElementById("shareBtn");
@@ -292,7 +281,15 @@ shareBtn.addEventListener("click", async () => {
 });
 
 
+document
+.getElementById("nextBtn")
+.addEventListener("click", ()=>{
 
+    currentIndex++;
+
+    if(currentIndex >= photos.length){
+        currentIndex = 0;
+    }
     updatePhoto();
 });
 
